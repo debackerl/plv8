@@ -4,7 +4,6 @@
 #
 # @param DISABLE_DIALECT if defined, not build dialects (i.e. plcoffee, etc)
 # @param ENABLE_DEBUGGER_SUPPORT enables v8 debugger agent
-# @param ENABLE_HEAP_SNAPSHOT enables v8 heap snapshot
 #
 # There are two ways to build plv8.
 # 1. Dynamic link to v8 (default)
@@ -53,16 +52,13 @@ endif
 ifdef ENABLE_DEBUGGER_SUPPORT
 OPT_ENABLE_DEBUGGER_SUPPORT = -DENABLE_DEBUGGER_SUPPORT
 endif
-ifdef ENABLE_HEAP_SNAPSHOT
-OPT_ENABLE_HEAP_SNAPSHOT = -DENABLE_HEAP_SNAPSHOT
-endif
 
 # for older g++ (e.g. 4.6.x), which do not support c++11
 #OPTFLAGS = -O2 -std=gnu++0x -fno-rtti
 
 OPTFLAGS = -O2 -std=c++11 -fno-rtti
 
-CCFLAGS = -Wall $(OPTFLAGS) $(OPT_ENABLE_DEBUGGER_SUPPORT) $(OPT_ENABLE_HEAP_SNAPSHOT)
+CCFLAGS = -Wall $(OPTFLAGS) $(OPT_ENABLE_DEBUGGER_SUPPORT)
 
 ifdef V8_SRCDIR
 override CPPFLAGS += -I$(V8_SRCDIR) -I$(V8_SRCDIR)/include
